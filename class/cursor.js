@@ -23,11 +23,27 @@ class Cursor {
   }
 
   left() {
-    // Move cursor left
+    if (this.col - 1 >= 0) {
+      this.col -= 1;
+    }
   }
 
   right() {
-    // Move cursor right
+    if (this.col + 1 < this.numCols) {
+      this.col += 1;
+    }
+  }
+
+  up() {
+    if (this.row - 1 >= 0) {
+      this.row -= 1;
+    }
+  }
+
+  down() {
+    if (this.row + 1 < this.numRows) {
+      this.row += 1;
+    }
   }
 
 }
