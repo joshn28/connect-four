@@ -45,6 +45,10 @@ class ConnectFour {
       return 'X';
     } else if (ConnectFour.checkHorizontalWin(grid, 'O')) {
       return 'O';
+    } else if (ConnectFour.checkVerticalWin(grid, 'X')) {
+      return 'X';
+    } else if (ConnectFour.checkVerticalWin(grid, 'O')) {
+      return 'O';
     }
 
   }
@@ -77,6 +81,35 @@ class ConnectFour {
     });
 
     return win;
+  }
+
+  static checkVerticalWin(grid, player) {
+
+    for (let col = 0; col < grid[0].length; col++) {
+      if (ConnectFour.checkSingleCol(grid, player, col)) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  static checkSingleCol(grid, player, col) {
+
+    for (let i = 0; i < grid.length - 3; i++) {
+      let arr = [];
+
+      for (let row = i; row < i + 4; row++) {
+        const char = grid[row][col];
+        arr.push(char);
+      }
+      
+      if (arr.every(char => char === player)) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
   static endGame(winner) {
