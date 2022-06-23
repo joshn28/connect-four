@@ -142,35 +142,29 @@ class ConnectFour {
     let count4 = 0;
 
     while (index < 4) {
-      const row1 = grid[row + index];
-      const row2 = grid[row - index];
-      const row3 = grid[row + index];
-      const row4 = grid[row - index];
+      const upperRow = grid[row + index];
+      const lowerRow = grid[row - index];
       let char;
 
-      if (row1 !== undefined) {
-        char = row1[col + index];
+      if (upperRow !== undefined) {
+        char = upperRow[col + index];
         if (char === player) {
           count1++;
         }
-      }
-      
-      if (row2 !== undefined) {
-        char = row2[col - index];
-        if (char === player) {
-          count2++;
-        }
-      }
-      
-      if (row3 !== undefined) {
-        char = row3[col - index];
+
+        char = upperRow[col - index];
         if (char === player) {
           count3++;
         }
       }
       
-      if (row4 !== undefined) {
-        char = row4[col + index];
+      if (lowerRow !== undefined) {
+        char = lowerRow[col - index];
+        if (char === player) {
+          count2++;
+        }
+
+        char = lowerRow[col + index];
         if (char === player) {
           count4++;
         }
