@@ -39,8 +39,12 @@ class ConnectFour {
     // Return 'T' if the game is a tie
     // Return false if the game has not ended
 
-    if (this.gridIsEmpty(grid)) {
+    if (ConnectFour.gridIsEmpty(grid)) {
       return false;
+    } else if (ConnectFour.checkHorizontalWin(grid, 'X')) {
+      return 'X';
+    } else if (ConnectFour.checkHorizontalWin(grid, 'O')) {
+      return 'O';
     }
 
   }
@@ -56,6 +60,23 @@ class ConnectFour {
     });
 
     return isEmpty;
+  }
+
+  static checkHorizontalWin(grid, player) {
+
+    let win = false;
+    grid.forEach(row => {
+      for (let i = 0; i < row.length - 3; i++) {
+        let arr = row.slice(i, i + 4);
+
+        if (arr.every(char => char === player)) {
+          win = true;
+          return win;
+        }
+      }
+    });
+
+    return win;
   }
 
   static endGame(winner) {
