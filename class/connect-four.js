@@ -49,6 +49,10 @@ class ConnectFour {
       return 'X';
     } else if (ConnectFour.checkVerticalWin(grid, 'O')) {
       return 'O';
+    } else if (ConnectFour.checkDiagonalWin(grid, 'X')) {
+      return 'X';
+    } else if (ConnectFour.checkDiagonalWin(grid, 'O')) {
+      return 'O';
     }
 
   }
@@ -110,6 +114,72 @@ class ConnectFour {
     }
 
     return false;
+  }
+
+  static checkDiagonalWin(grid, player) {
+
+    let win = false;
+    grid.forEach((row, i) => {
+
+      row.forEach((char, j) => {
+        if (char === player && ConnectFour.checkDiagonals(grid, player, i, j)) {
+          win = true;
+          return;
+        }
+      });
+      
+    });
+
+    return win;
+  }
+
+  static checkDiagonals(grid, player, row, col) {
+
+    let index = 1;
+    let count1 = 0;
+    let count2 = 0;
+    let count3 = 0;
+    let count4 = 0;
+
+    while (index < 4) {
+      const row1 = grid[row + index];
+      const row2 = grid[row - index];
+      const row3 = grid[row + index];
+      const row4 = grid[row - index];
+      let char;
+
+      if (row1 !== undefined) {
+        char = row1[col + index];
+        if (char === player) {
+          count1++;
+        }
+      }
+      
+      if (row2 !== undefined) {
+        char = row2[col - index];
+        if (char === player) {
+          count2++;
+        }
+      }
+      
+      if (row3 !== undefined) {
+        char = row3[col - index];
+        if (char === player) {
+          count3++;
+        }
+      }
+      
+      if (row4 !== undefined) {
+        char = row4[col + index];
+        if (char === player) {
+          count4++;
+        }
+      }
+
+      index++;
+    }
+
+    return [count1, count2, count3, count4].some(num => num === 3);
   }
 
   static endGame(winner) {
