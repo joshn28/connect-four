@@ -64,17 +64,19 @@ class ConnectFour {
 
   static checkHorizontalWin(grid, player) {
 
+    let win = false;
     grid.forEach(row => {
       for (let i = 0; i < row.length - 3; i++) {
         let arr = row.slice(i, i + 4);
 
         if (arr.every(char => char === player)) {
-          return true;
+          win = true;
+          return;
         }
       }
     });
 
-    return false;
+    return win;
   }
 
   static endGame(winner) {
