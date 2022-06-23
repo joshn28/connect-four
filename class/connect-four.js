@@ -136,44 +136,44 @@ class ConnectFour {
   static checkDiagonals(grid, player, row, col) {
 
     let index = 1;
-    let count1 = 0;
-    let count2 = 0;
-    let count3 = 0;
-    let count4 = 0;
+    let downRight = 0;
+    let downLeft = 0;
+    let upLeft = 0;
+    let upRight = 0;
 
     while (index < 4) {
-      const upperRow = grid[row + index];
-      const lowerRow = grid[row - index];
+      const lowerRow = grid[row + index];
+      const upperRow = grid[row - index];
       let char;
 
-      if (upperRow !== undefined) {
-        char = upperRow[col + index];
+      if (lowerRow !== undefined) {
+        char = lowerRow[col + index];
         if (char === player) {
-          count1++;
+          downRight++;
         }
 
-        char = upperRow[col - index];
+        char = lowerRow[col - index];
         if (char === player) {
-          count3++;
+          downLeft++;
         }
       }
       
-      if (lowerRow !== undefined) {
-        char = lowerRow[col - index];
+      if (upperRow !== undefined) {
+        char = upperRow[col - index];
         if (char === player) {
-          count2++;
+          upLeft++;
         }
 
-        char = lowerRow[col + index];
+        char = upperRow[col + index];
         if (char === player) {
-          count4++;
+          upRight++;
         }
       }
 
       index++;
     }
 
-    return [count1, count2, count3, count4].some(num => num === 3);
+    return [downRight, upLeft, downLeft, upRight].some(num => num === 3);
   }
 
   static endGame(winner) {
