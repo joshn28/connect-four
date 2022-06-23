@@ -39,6 +39,23 @@ class ConnectFour {
     // Return 'T' if the game is a tie
     // Return false if the game has not ended
 
+    if (this.gridIsEmpty(grid)) {
+      return false;
+    }
+
+  }
+
+  static gridIsEmpty(grid) {
+
+    let isEmpty = true;
+    grid.forEach(row => {
+      if (!row.every(char => char === ' ')) {
+        isEmpty = false;
+        return;
+      }
+    });
+
+    return isEmpty;
   }
 
   static endGame(winner) {
