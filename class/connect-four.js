@@ -53,6 +53,10 @@ class ConnectFour {
       return 'X';
     } else if (ConnectFour.checkDiagonalWin(grid, 'O')) {
       return 'O';
+    } else if (ConnectFour.checkTie(grid)) {
+      return 'T';
+    } else {
+      return false;
     }
 
   }
@@ -68,6 +72,19 @@ class ConnectFour {
     });
 
     return isEmpty;
+  }
+
+  static checkTie(grid) {
+
+    let tie = true;
+    grid.forEach(row => {
+      if (row.includes(' ')) {
+        tie = false;
+        return;
+      }
+    });
+
+    return tie;
   }
 
   static checkHorizontalWin(grid, player) {
