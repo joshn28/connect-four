@@ -19,7 +19,7 @@ class ConnectFour {
     // Initialize a 6x7 connect-four grid
     Screen.initialize(6, 7);
     Screen.setGridlines(true);
-    
+
     Screen.addCommand('a', 'move left', () => {
       this.cursor.left();
     });
@@ -36,6 +36,8 @@ class ConnectFour {
       }
     });
 
+    Screen.setMessage(`It's ${this.playerTurn}'s turn`);
+
     this.cursor.setBackgroundColor();
     Screen.render();
 
@@ -48,13 +50,15 @@ class ConnectFour {
     if (this.grid[row][col] === ' ') {
       this.grid[row][col] = this.playerTurn;
       Screen.setGrid(row, col, this.playerTurn);
-      Screen.render();
       
       if (this.playerTurn === 'O') {
         this.playerTurn = 'X';
       } else {
         this.playerTurn = 'O';
       }
+
+      Screen.setMessage(`It's ${this.playerTurn}'s turn`);
+      Screen.render();
     } else {
       console.log('space is occupied');
     }
