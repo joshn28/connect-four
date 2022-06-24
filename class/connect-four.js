@@ -19,25 +19,27 @@ class ConnectFour {
     // Initialize a 6x7 connect-four grid
     Screen.initialize(6, 7);
     Screen.setGridlines(true);
-
-    Screen.addCommand('w', 'move up', () => {
-      this.cursor.up();
-    });
+    
     Screen.addCommand('a', 'move left', () => {
       this.cursor.left();
-    });
-    Screen.addCommand('s', 'move down', () => {
-      this.cursor.down();
     });
     Screen.addCommand('d', 'move right', () => {
       this.cursor.right();
     });
     Screen.addCommand('p', 'place move', () => {
       this.placeMove();
-    })
+
+      const winner = ConnectFour.checkWin(this.grid);
+
+      if (winner) {
+        ConnectFour.endGame(winner);
+      }
+    });
 
     this.cursor.setBackgroundColor();
     Screen.render();
+
+    Screen.printCommands();
   }
 
   placeMove() {
