@@ -22,6 +22,18 @@ class ConnectFour {
 
     // Replace this with real commands
     Screen.addCommand('t', 'test command (remove)', ConnectFour.testCommand);
+    Screen.addCommand('w', 'move up', () => {
+      this.cursor.up();
+    });
+    Screen.addCommand('a', 'move left', () => {
+      this.cursor.left();
+    });
+    Screen.addCommand('s', 'move down', () => {
+      this.cursor.down();
+    });
+    Screen.addCommand('d', 'move right', () => {
+      this.cursor.right();
+    });
 
     this.cursor.setBackgroundColor();
     Screen.render();
@@ -107,7 +119,7 @@ class ConnectFour {
   static checkVerticalWin(grid, player) {
 
     for (let col = 0; col < grid[0].length; col++) {
-      if (ConnectFour.checkSingleCol(grid, player, col)) {
+      if (ConnectFour.checkColumn(grid, player, col)) {
         return true;
       }
     }
@@ -115,7 +127,7 @@ class ConnectFour {
     return false;
   }
 
-  static checkSingleCol(grid, player, col) {
+  static checkColumn(grid, player, col) {
 
     for (let i = 0; i < grid.length - 3; i++) {
       let arr = [];
