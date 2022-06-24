@@ -22,6 +22,10 @@ class Cursor {
     Screen.setBackgroundColor(this.row, this.col, this.cursorColor);
   }
 
+  getCurrentPosition() {
+    return { row: this.row, col: this.col };
+  }
+
   left() {
     if (this.col - 1 >= 0) {
       this.resetBackgroundColor();
