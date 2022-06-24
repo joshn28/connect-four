@@ -20,8 +20,6 @@ class ConnectFour {
     Screen.initialize(6, 7);
     Screen.setGridlines(true);
 
-    // Replace this with real commands
-    Screen.addCommand('t', 'test command (remove)', ConnectFour.testCommand);
     Screen.addCommand('w', 'move up', () => {
       this.cursor.up();
     });
@@ -34,22 +32,33 @@ class ConnectFour {
     Screen.addCommand('d', 'move right', () => {
       this.cursor.right();
     });
+    Screen.addCommand('p', 'place move', () => {
+      this.placeMove();
+    })
 
     this.cursor.setBackgroundColor();
     Screen.render();
   }
 
-  // Remove this
-  static testCommand() {
-    console.log("TEST COMMAND");
+  placeMove() {
+    const { row, col } = this.cursor.getCurrentPosition();
+
+    if (this.grid[row][col] === ' ') {
+      this.grid[row][col] = this.playerTurn;
+      Screen.setGrid(row, col, this.playerTurn);
+      Screen.render();
+      
+      if (this.playerTurn === 'O') {
+        this.playerTurn = 'X';
+      } else {
+        this.playerTurn = 'O';
+      }
+    } else {
+      console.log('space is occupied');
+    }
   }
 
   static checkWin(grid) {
-
-    // Return 'X' if player X wins
-    // Return 'O' if player O wins
-    // Return 'T' if the game is a tie
-    // Return false if the game has not ended
 
     if (ConnectFour.gridIsEmpty(grid)) {
       return false;
