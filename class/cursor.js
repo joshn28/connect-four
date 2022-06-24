@@ -24,25 +24,37 @@ class Cursor {
 
   left() {
     if (this.col - 1 >= 0) {
+      this.resetBackgroundColor();
       this.col -= 1;
+      this.setBackgroundColor();
+      Screen.render();
     }
   }
 
   right() {
     if (this.col + 1 < this.numCols) {
+      this.resetBackgroundColor();
       this.col += 1;
+      this.setBackgroundColor();
+      Screen.render();
     }
   }
 
   up() {
     if (this.row - 1 >= 0) {
+      this.resetBackgroundColor();
       this.row -= 1;
+      this.setBackgroundColor();
+      Screen.render();
     }
   }
 
   down() {
     if (this.row + 1 < this.numRows) {
+      this.resetBackgroundColor();
       this.row += 1;
+      this.setBackgroundColor();
+      Screen.render();
     }
   }
 
