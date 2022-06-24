@@ -46,10 +46,11 @@ class ConnectFour {
 
   placeMove() {
     const { row, col } = this.cursor.getCurrentPosition();
+    const lowestPos = ConnectFour.getLowestPosition(this.grid, row, col);
 
-    if (this.grid[row][col] === ' ') {
-      this.grid[row][col] = this.playerTurn;
-      Screen.setGrid(row, col, this.playerTurn);
+    if (this.grid[lowestPos][col] === ' ') {
+      this.grid[lowestPos][col] = this.playerTurn;
+      Screen.setGrid(lowestPos, col, this.playerTurn);
       
       if (this.playerTurn === 'O') {
         this.playerTurn = 'X';
@@ -62,6 +63,16 @@ class ConnectFour {
     } else {
       console.log('space is occupied');
     }
+  }
+
+  static getLowestPosition(grid, row, col) {
+    for (let lowestPos = grid.length - 1; lowestPos > row; lowestPos--) {
+      if (grid[lowestPos][col] === ' ') {
+        return lowestPos;
+      }
+    }
+
+    return row;
   }
 
   static checkWin(grid) {
